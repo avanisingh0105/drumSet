@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	   
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Load the Paper.js library -->
+	<script type="text/javascript" src="paper-full.js"></script>
+<link rel="stylesheet" type="text/css" href="circles.css">
+<!-- Define inlined PaperScript associate it with myCanvas -->
+	<script src="https://cdn.jsdelivr.net/npm/howler@2.2.0/dist/howler.js"></script>
+<!-- bootstrap -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+<!-- bootstrap -->
+<script type="text/paperscript" canvas="myCanvas">
+
+
+	
+	// Set the content of the text item:
+	
+	var data = {
+
+	a: {
+	color:"purple",
+	sound: new Howl({ src:['sounds/boom.wav'] })
+		},
+
+		s: {
+	color:"green",
+	sound: new Howl({ src:['sounds/clap.wav'] })
+		},
+d: {
+	color:"red",
+	sound: new Howl({ src:['sounds/hihat.wav'] })
+		},
+f: {
+	color:"blue",
+	sound: new Howl({ src:['sounds/kick.wav'] })
+		},
+
+		g: {
+	color:"orange",
+	sound: new Howl({ src:['sounds/openhat.wav'] })
+		},
+h: {
+	color:"cyan",
+	sound: new Howl({ src:['sounds/ride.wav'] })
+		},
+j: {
+	color:"pink",
+	sound: new Howl({ src:['sounds/snare.wav'] })
+		},
+k: {
+	color:"yellow",
+	sound: new Howl({ src:['sounds/tink.wav'] })
+		},
+l: {
+	color:"grey",
+	sound: new Howl({ src:['sounds/tom.mp3'] })
+		}
+
+
+	}
+
+	var circles = [];
+	function onKeyDown(event)
+	{
+		if(data[event.key])
+		{
+			var maxPoint = new Point(view.size.width,view.size.height);
+			var randomPoint = Point.random();
+			var point = maxPoint * randomPoint;
+			var newCircle = new Path.Circle(point,250);
+			newCircle.fillColor = data[event.key].color; 
+			data[event.key].sound.play();
+			circles.push(newCircle);
+
+		}
+	
+	}
+		
+		function onFrame(event)
+		{
+			for(var i=0;i<circles.length; i++)
+			{
+					circles[i].fillColor.hue+=1;
+			circles[i].scale(.9);
+			}
+		
+		}
+
+</script>
+</head>
+<body>
+
+		<canvas id="myCanvas"  height="100" width="200"  resize>
+<!-- 		<div id="yourDiv" style="position:absolute;left:20;top:20">Your content</div>
+ -->
+<!--   <div id="d" style="width:500px;height:300px"></div>
+				 -->
+			<!-- <div class="container">
+				<div class="row">
+					<div class="square">A</div>
+					<div class="square">S</div>
+					<div class="square">D</div>
+					<div class="square">F</div>
+					<div class="square">G</div>
+					<div class="square">H</div>
+					<div class="square">J</div>
+					<div class="square">K</div>
+					<div class="square">L</div>
+				
+			</div>
+			
+		</div> -->
+
+
+
+
+		</canvas>
+	
+
+</body>
+</html>
